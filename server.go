@@ -1,11 +1,7 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
-
-	"github.com/JakubMrowicki/echo-go-web-server/components"
-	"github.com/JakubMrowicki/echo-go-web-server/services"
+	"github.com/JakubMrowicki/echo-go-web-server/routes"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -20,21 +16,9 @@ func main() {
 		Browse: true,
 	}))
 
-	// Routes
-	e.File("/", "assets/public/index.html")
-	e.GET("/weather", func(c echo.Context) error {
-		temp := services.RandomWeather() + "°C"
-		component := components.Boilerplate(temp)
-		return component.Render(c.Request().Context(), c.Response().Writer)
-	})
-	e.GET("/get-temperature", func(c echo.Context) error {
-		temp := services.RandomWeather()
-		return c.String(http.StatusOK, fmt.Sprintf("%v °C", temp))
-	})
-	e.Any("/*", func(c echo.Context) error {
-		c.Error(echo.ErrNotFound)
-		return nil
-	})
+	// Page Routes
+	routes.Pages(e)
+	routes.Api(e)
 
 	e.Logger.Fatal(e.Start(":3000"))
 }
