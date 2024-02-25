@@ -1,0 +1,5 @@
+root = "."
+tmp_dir = "tmp"
+pre_cmd = "make generate"
+cmd = "go build -o ./tmp/main ."
+run_cmd = "./tmp/main"
