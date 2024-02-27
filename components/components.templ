@@ -5,7 +5,7 @@ templ WeatherUI(temp string) {
 		<div class="text-center">
 			<h1 class="text-xl mb-4">Weather In New York</h1>
 			<p class="text-5xl">
-				<span hx-get="/api/get-temperature" hx-trigger="every 5s">{ temp }</span>
+				<span hx-get="/api/get-temperature" hx-trigger="every 1s">{ temp }</span>
 			</p>
 		</div>
 	</div>
